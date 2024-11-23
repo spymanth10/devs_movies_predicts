@@ -57,7 +57,7 @@ function App() {
     <div className="app">
       <div className="content">
         <h1 className="netflix-logo">Netflix</h1>
-        <h2 className="title">Movie Success Predictor</h2>
+        <h2 className="title">Predictive Revenue System</h2>
         
         <div className="form-container">
           <form onSubmit={handleSubmit}>
