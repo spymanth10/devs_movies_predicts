@@ -2,7 +2,7 @@
 FROM node:16
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /frontend
 
 # Copy package.json and install dependencies
 COPY package*.json ./
@@ -16,7 +16,8 @@ RUN npm run build
 
 # Use an nginx image to serve the build
 FROM nginx:1.21
-COPY --from=0 /app/build /usr/share/nginx/html
+COPY --from=0 /frontend/build /usr/share/nginx/html
+# COPY predictive-analysis-movie\frontend\public\index.html
 
 # Expose the port for nginx
 EXPOSE 80
