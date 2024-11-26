@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    bat docker-compose up --build -d
+                    bat 'docker-compose up --build -d'
                     // try {
                     //     bat 'docker-compose up --build -d'  // For Linux/MacOS
                     //     // For Windows, you may need to use bat instead of sh
