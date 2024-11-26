@@ -17,7 +17,7 @@ WORKDIR /backend
 COPY server.py .
 COPY xgb_model.pkl .
 COPY word2vec_genres.model .
-COPY label_encoders.pkl .
+COPY label_encoder.pkl .
 COPY requirements.txt .
 
 # Install dependencies from requirements.txt
