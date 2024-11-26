@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        RECIPIENTS = 'vrinda.khemka21@st.niituniversity.in,syed.anser21@st.niituniversity.in,dhruv.singh21@st.niituniversity.in'
+        RECIPIENTS = 'vrinda.khemka21@st.niituniversity.in'
         SUBJECT = 'Jenkins Build Failure Notification'
     }
 
@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the repository
-                git branch: 'main', url: 'https://github.com/your-repo/react-app.git'
+                git branch: 'main', url: 'https://github.com/VrindaKhemka/Predictive-Analysis.git'
             }
         }
 
@@ -38,7 +38,8 @@ pipeline {
                 emailext(
                     subject: "${SUBJECT}",
                     body: "The Jenkins build has failed. Please check the logs for more details.",
-                    to: "${RECIPIENTS}"
+                    to: "${RECIPIENTS}",
+                    attachLog: true
                 )
             }
         }
