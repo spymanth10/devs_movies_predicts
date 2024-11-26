@@ -15,7 +15,7 @@ WORKDIR /backend
 
 # Copy application code and model files into the container
 COPY server.py .
-COPY xgb_model.pkl .
+COPY rgb_model.pkl .
 COPY word2vec_genres.model .
 COPY label_encoders.pkl .
 COPY requirements.txt .
