@@ -11,7 +11,8 @@ function App() {
     vote_count: 0,
     release_month: 1,
     genres: [],
-    production_companies: []
+    production_companies: [],
+    credits: []
   });
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
@@ -47,7 +48,7 @@ function App() {
     const { name, value } = e.target;
     setFormData(prevData => ({
       ...prevData,
-      [name]: name === 'genres' || name === 'production_companies' 
+      [name]: name === 'genres' || name === 'production_companies' || name === 'credits' 
         ? value.split(',').map(item => item.trim()) 
         : name === 'release_month' ? parseInt(value, 10) : parseFloat(value)
     }));
@@ -148,6 +149,20 @@ function App() {
                 required
               />
             </div>
+
+            <div className="form-group">
+              <label htmlFor="credits">Cast (comma-separated)</label>
+              <input
+                type="text"
+                id="credits"
+                name="credits"
+                placeholder="Enter Cast"
+                value={formData.credits.join(', ')}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
 
             <div className="form-group">
               <label htmlFor="release_month">Release Month</label>

@@ -11,15 +11,11 @@ CORS(app)
 
 # Load the model files
 try:
-    # # Load the model files
-    # xgb_model = joblib.load('D:/7th sem/Capstone II/predictive-analysis-movie/backend/xgb_model.pkl')
-    # word2vec = gensim.models.Word2Vec.load('D:/7th sem/Capstone II/predictive-analysis-movie/backend/word2vec_genres.model')
-    # label_encoder = joblib.load("D:/7th sem/Capstone II/predictive-analysis-movie/backend/label_encoder.pkl")
-    # # Load the model files
     xgb_model = joblib.load('xgb_model.pkl')
     word2vec = gensim.models.Word2Vec.load('word2vec_genres.model')
-    label_encoder = joblib.load("label_encoder.pkl")
-
+    label_encoder = joblib.load("label_encoders.pkl")
+    companies_encoder = label_encoder['companies_encoder']
+    credits_encoder = label_encoder['credits_encoder']
 except Exception as e:
     print(f"Error loading model files: {e}")
     exit(1)
@@ -34,6 +30,9 @@ def preprocess_input(sample):
     # Process production companies
     companies = sample.get('production_companies', [])
     companies_encoded = sum(label_encoder.transform([c])[0] for c in companies if c in label_encoder.classes_)
+    # Process credits
+    credits = sample.get('credits', [])
+    credits_encoded = sum(credits_encoder.transform([c])[0] for c in credits if c in credits_encoder.classes_)
 
     # Combine features
     features = [
@@ -45,7 +44,8 @@ def preprocess_input(sample):
         sample.get('vote_count', 0),
         sample.get('release_month', 0),
         *genre_embedding,
-        companies_encoded
+        companies_encoded,
+        credits_encoded
     ]
     return np.array(features).reshape(1, -1)
 
