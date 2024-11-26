@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        RECIPIENTS = 'vrinda.khemka21@st.niituniversity.in'
+        RECIPIENTS = 'vrinda.khemka21@st.niituniversity.in,syed.anser21@st.niituniversity.in,dhruv.singh21@st.niituniversity.in'
         SUBJECT = 'Jenkins Build Failure Notification'
     }
 
