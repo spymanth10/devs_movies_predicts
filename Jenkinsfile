@@ -38,7 +38,7 @@ pipeline {
                 emailext(
                     subject: "${SUBJECT}",
                     body: "The Jenkins build has failed. Please check the logs for more details.",
-                    to: "${RECIPIENTS}"
+                    to: "${RECIPIENTS}",
                     attachLog: true
                 )
             }
