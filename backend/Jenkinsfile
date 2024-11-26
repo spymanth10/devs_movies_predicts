@@ -10,16 +10,16 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    bat 'docker-compose up --build -d'
-                    // try {
-                    //     bat 'docker-compose up --build -d'  // For Linux/MacOS
-                    //     // For Windows, you may need to use bat instead of sh
-                    //     // bat 'docker-compose up --build -d'  // For Windows
-                    // } catch (Exception e) {
-                    //     // Handle failure if the docker-compose command fails
-                    //     currentBuild.result = 'FAILURE'
-                    //     throw e  // Re-throw the exception to trigger failure
-                    // }
+                    // bat 'docker-compose up --build -d'
+                    try {
+                        bat 'docker-compose up --build -d'  // For Linux/MacOS
+                        // For Windows, you may need to use bat instead of sh
+                        // bat 'docker-compose up --build -d'  // For Windows
+                    } catch (Exception e) {
+                        // Handle failure if the docker-compose command fails
+                        currentBuild.result = 'FAILURE'
+                        throw e  // Re-throw the exception to trigger failure
+                    }
                 }
             }
         }
