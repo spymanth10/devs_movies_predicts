@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    environment {
+        RECIPIENTS = 'vrinda.khemka21@st.niituniversity.in,syed.anser21@st.niituniversity.in,dhruv.singh21@st.niituniversity.in'
+        SUBJECT = 'Jenkins Build Failure Notification'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    bat docker-compose up --build -d command
+                    // try {
+                    //     bat 'docker-compose up --build -d'  // For Linux/MacOS
+                    //     // For Windows, you may need to use bat instead of sh
+                    //     // bat 'docker-compose up --build -d'  // For Windows
+                    // } catch (Exception e) {
+                    //     // Handle failure if the docker-compose command fails
+                    //     currentBuild.result = 'FAILURE'
+                    //     throw e  // Re-throw the exception to trigger failure
+                    // }
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            script {
+                // Send email if the pipeline fails
+                emailext (
+                    subject: "${SUBJECT}",
+                    body: "The Jenkins build has failed. Please check the logs for more details.",
+                    to: "${RECIPIENTS}"
+                )
+            }
+        }
+    }
+}
