@@ -11,11 +11,13 @@ CORS(app)
 
 # Load the model files
 try:
-    xgb_model = joblib.load('xgb_model.pkl')
+    xgb_model = joblib.load('rgb_model.pkl')
     word2vec = gensim.models.Word2Vec.load('word2vec_genres.model')
     label_encoder = joblib.load("label_encoders.pkl")
+    # companies_encoder = joblib.load("company_encoders.pkl")
     companies_encoder = label_encoder['companies_encoder']
     credits_encoder = label_encoder['credits_encoder']
+    # credits_encoder = joblib.load("credits_encoders.pkl")
 except Exception as e:
     print(f"Error loading model files: {e}")
     exit(1)
@@ -29,7 +31,7 @@ def preprocess_input(sample):
 
     # Process production companies
     companies = sample.get('production_companies', [])
-    companies_encoded = sum(label_encoder.transform([c])[0] for c in companies if c in label_encoder.classes_)
+    companies_encoded = sum(companies_encoder.transform([c])[0] for c in companies if c in companies_encoder.classes_)
     # Process credits
     credits = sample.get('credits', [])
     credits_encoded = sum(credits_encoder.transform([c])[0] for c in credits if c in credits_encoder.classes_)
@@ -64,4 +66,4 @@ def predict():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=True)
