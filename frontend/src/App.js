@@ -57,7 +57,7 @@ function App() {
   return (
     <div className="app">
       <div className="content">
-        <h1 className="netflix-logo">NetFlix</h1>
+        <h1 className="netflix-logo">NUFlix</h1>
         <h2 className="title">Predictive Revenue System</h2>
         
         <div className="form-container">

@@ -20,11 +20,8 @@ COPY word2vec_genres.model .
 COPY label_encoders.pkl .
 COPY requirements.txt .
 
-# Install dependencies from requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Expose the port for the app
 EXPOSE 5000
 
-# Set the command to run the app
 CMD ["python", "server.py"]

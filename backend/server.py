@@ -14,10 +14,8 @@ try:
     xgb_model = joblib.load('rgb_model.pkl')
     word2vec = gensim.models.Word2Vec.load('word2vec_genres.model')
     label_encoder = joblib.load("label_encoders.pkl")
-    # companies_encoder = joblib.load("company_encoders.pkl")
     companies_encoder = label_encoder['companies_encoder']
     credits_encoder = label_encoder['credits_encoder']
-    # credits_encoder = joblib.load("credits_encoders.pkl")
 except Exception as e:
     print(f"Error loading model files: {e}")
     exit(1)
